@@ -99,9 +99,18 @@ int main(int, char **)
 
                 cin >> index;
 
+                if (index <= basesize && index > 0)
+                {
+
                 Card card = base.getCard(index - 1);
 
                 cout << card.getNumber() << " " << card.getExpiry() << " " << card.getBrand() << endl;
+                }
+
+                else
+                {
+                    cout << "Podano niepoprawny indeks karty. \n";
+                }
             }
             else
             {
@@ -121,7 +130,14 @@ int main(int, char **)
 
                 cin >> index;
 
+                if(index <= base.getBaseSize() && index > 0)
+                {
                 base.deleteCard(index);
+                }
+                else
+                {
+                    cout << "Podano niepoprawny indeks.\n";
+                }
             }
             else
             {
