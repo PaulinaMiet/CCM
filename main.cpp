@@ -45,12 +45,12 @@ int main(int, char **)
 
             string c_numer, expiry, brand;
 
-            cout << "Podaj numer, date wygasniecia i wydawce karty" << endl;
 
             while (1)
             {
 
-                cin >> c_numer >> expiry, brand;
+                cout << "Podaj numer, date wygasniecia i wydawce karty" << endl;
+                cin >> c_numer >> expiry >> brand;
 
                 Card new_card(c_numer, expiry, brand);
 
@@ -62,11 +62,11 @@ int main(int, char **)
                 }
                 else
                 {
-                    cout << "Podano niepoprawny numer karty lub date wygasniecia. Sprobowac ponownie? T/N";
+                    cout << "Podano niepoprawny numer karty lub date wygasniecia. Sprobowac ponownie? T/N\n";
                     char YESNO;
-                    YESNO = getchar();
+                    cin >> YESNO;
 
-                    if (YESNO == 'T' || YESNO == 'T')
+                    if (YESNO == 'T' || YESNO == 't')
                     {
                         continue;
                     }
@@ -76,7 +76,7 @@ int main(int, char **)
                     }
                     else
                     {
-                        cout << "Wpisano niepoprawną instrukcję.";
+                        cout << "Wpisano niepoprawna instrukcje.\n";
                         break;
                     }
                 }
