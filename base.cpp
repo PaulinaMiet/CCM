@@ -45,7 +45,7 @@ void CardBase::saveToFile(std::string name)
     for (Card card : cards)
     {
 
-        out << card.getNumber() << " " << card.getExpiry() << card.getBrand() << " " << std::endl;
+        out << card.getNumber() << " " << card.getExpiry() << " " << card.getBrand() << std::endl;
     }
 
     out.close();

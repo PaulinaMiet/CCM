@@ -1,3 +1,5 @@
+//Baza kart kredytowych Paulina Miętkiewska
+
 #include <iostream>
 
 #include "card.h"
