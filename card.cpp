@@ -16,37 +16,37 @@ bool Card::verify()
     // sprawdzanie rozmiaru
 
     if (card_number.length() != 16)
+    {
         return false;
+    }
 
     if (expiration_date.length() != 5)
-        return false;
-
+    {
+            return false;
+    }
 
     // sprawdzanie daty - po lewej stronie dwie cyfry, musi to być miesiąc, więc sprawdzamy czy jest poprawny
 
-    if (expiration_date[0] == 0)
+    if (expiration_date[0] == '0')
     {
 
         if (!('0' < expiration_date[1] && expiration_date[1] <= '9'))
         {
-
             return false;
         }
     }
 
-    else if (expiration_date[0] == 1)
+    else if (expiration_date[0] == '1')
     {
 
         if (!('0' <= expiration_date[1] && expiration_date[1] <= '2'))
         {
-
             return false;
         }
     }
 
     else
     {
-
         return false;
     }
 
@@ -54,7 +54,6 @@ bool Card::verify()
 
     if (expiration_date[2] != '/')
     {
-
         return false;
     }
 
@@ -62,7 +61,6 @@ bool Card::verify()
 
     if ((!isdigit(expiration_date[3])) || (!isdigit(expiration_date[4])))
     {
-
         return false;
     }
 
@@ -75,7 +73,6 @@ bool Card::verify()
 
         if (!isdigit(i))
         {
-
             return false;
         }
     }
@@ -91,19 +88,19 @@ bool Card::verify()
     {
         int a;
 
-        a = card_number[16 - i]*((i+1)%2 + 1);
+        a = (card_number[15 - i] - '0') * ((i) % 2 + 1);
 
         if (a >= 10)
         {
-            sum += (a%10+1);
+            sum += (a % 10 + 1);
         }
         else
         {
             sum += a;
         }
     }
-    
-    if (sum%10 != 0)
+
+    if (sum % 10 != 0)
     {
         return false;
     }
