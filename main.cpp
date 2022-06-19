@@ -23,11 +23,13 @@ int main(int, char **)
 
              << "2. Odczytaj karte\n"
 
-             << "3. Odczytaj z pliku\n"
+             << "3. Usun karte\n"
 
-             << "4. Zapisz do pliku\n"
+             << "4. Odczytaj z pliku\n"
 
-             << "5. Wyjdz\n"
+             << "5. Zapisz do pliku\n"
+
+             << "6. Wyjdz\n"
 
              << "=========================================\n";
 
@@ -41,19 +43,44 @@ int main(int, char **)
         case 1:
         {
 
-            string c_numer, expiry;
+            string c_numer, expiry, brand;
 
-            cout << "Podaj numer i date wygasniecia" << endl;
+            cout << "Podaj numer, date wygasniecia i wydawce karty" << endl;
 
-            cin >> c_numer >> expiry;
+            while (1)
+            {
 
-            Card new_card(c_numer, expiry);
+                cin >> c_numer >> expiry, brand;
 
-            // if(new_card.verify()){
+                Card new_card(c_numer, expiry, brand);
 
-            base.addCard(new_card);
+                if (new_card.verify())
+                {
 
-            //}
+                    base.addCard(new_card);
+                    break;
+                }
+                else
+                {
+                    cout << "Podano niepoprawny numer karty lub date wygasniecia. Sprobowac ponownie? T/N";
+                    char YESNO;
+                    YESNO = getchar();
+
+                    if (YESNO == 'T' || YESNO == 'T')
+                    {
+                        continue;
+                    }
+                    else if (YESNO == 'N' || YESNO == 'n')
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        cout << "Wpisano niepoprawną instrukcję.";
+                        break;
+                    }
+                }
+            }
 
             break;
         }
@@ -62,19 +89,48 @@ int main(int, char **)
         {
 
             int index;
+            size_t basesize;
 
-            cout << "Podaj indeks (od 0 do " << endl; // rozmiar wektora??
+            basesize = base.getBaseSize();
 
-            cin >> index;
+            if (basesize > 0)
+            {
+                cout << "Podaj indeks karty do odczytania (od 1 do " << (basesize) << ")" << endl; // rozmiar wektora??
 
-            Card card = base.getCard(index);
+                cin >> index;
 
-            cout << card.card_number << " " << card.expiration_date << endl;
+                Card card = base.getCard(index - 1);
+
+                cout << card.getNumber() << " " << card.getExpiry() << " " << card.getBrand() << endl;
+            }
+            else
+            {
+                cout << "Baza danych jest pusta.\n";
+            }
 
             break;
         }
 
         case 3:
+        {
+            int index;
+
+            if (base.getBaseSize() > 0)
+            {
+                cout << "Podaj indeks karty do usuniecia (od 1 do " << (base.getBaseSize()) << ")" << endl; // rozmiar wektora??
+
+                cin >> index;
+
+                base.deleteCard(index);
+            }
+            else
+            {
+                cout << "Baza danych jest pusta.\n";
+            }
+            break;
+        }
+
+        case 4:
         {
 
             string name;
@@ -88,7 +144,7 @@ int main(int, char **)
             break;
         }
 
-        case 4:
+        case 5:
         {
 
             string name;
@@ -102,10 +158,16 @@ int main(int, char **)
             break;
         }
 
-        case 5:
+        case 6:
         {
 
             return 0;
+        }
+
+        default:
+        {
+            cout << "Podano niepoprawny numer polecenia.";
+            break;
         }
         }
     }

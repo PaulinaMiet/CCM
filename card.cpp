@@ -1,9 +1,21 @@
 #include "card.h"
 #include <iostream>
 
-Card::Card(std::string &number, std::string &expire)
-    : card_number(number), expiration_date(expire)
+Card::Card(std::string &number, std::string &expire, std::string &brand)
+    : card_number(number), expiration_date(expire), card_brand(brand)
 {
+}
+
+std::string Card::getBrand() {
+    return card_brand;
+}
+
+std::string Card::getNumber() {
+    return card_number;
+}
+
+std::string Card::getExpiry() {
+    return expiration_date;
 }
 
 bool Card::verify()

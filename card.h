@@ -2,15 +2,28 @@
 
 #include <string>
 
-struct Card
+class Card
 
 {
 
-    const std::string card_number;
+private:
 
-    const std::string expiration_date;
+    std::string card_number;
 
-    Card(std::string &number, std::string &expire);
+    std::string expiration_date;
+
+    std::string card_brand;
+
+public:
+
+    Card(std::string &number, std::string &expire, std::string &brand);
 
     bool verify();
+
+    std::string getBrand();
+
+    std::string getNumber();
+
+    std::string getExpiry();
+
 };

@@ -20,5 +20,9 @@ public:
 
     void addCard(Card card);
 
+    void deleteCard(int index);
+
     Card getCard(int index);
+
+    size_t getBaseSize();
 };
